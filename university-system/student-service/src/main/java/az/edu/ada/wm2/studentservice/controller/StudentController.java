@@ -23,26 +23,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/students")
 @RequiredArgsConstructor
-@Tag(name = "Students", description = "Student management endpoints")
+@Tag(name = "Telebeler", description = "Telebelerin idare edilmesi endpointleri")
 public class StudentController {
 
     private final StudentService studentService;
 
     @PostMapping
-    @Operation(summary = "Create student", description = "Creates a new student record.")
+    @Operation(summary = "telebe yarat", description = "Telebeni yaradir")
     public ResponseEntity<StudentResponseDto> createStudent(@Valid @RequestBody StudentRequestDto requestDto) {
         StudentResponseDto createdStudent = studentService.createStudent(requestDto);
         return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
     }
 
     @GetMapping
-    @Operation(summary = "Get all students", description = "Returns all students.")
+    @Operation(summary = "Telebeleri al", description = "telebeleri qaytarir")
     public ResponseEntity<List<StudentResponseDto>> getAllStudents() {
         return ResponseEntity.ok(studentService.getAllStudents());
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get student by id", description = "Returns a single student by id.")
+    @Operation(summary = "ID uzre telebeni al", description = "ID uzre telebeni alir")
     public ResponseEntity<StudentResponseDto> getStudentById(@PathVariable Long id) {
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
@@ -56,7 +56,7 @@ public ResponseEntity<List<StudentResponseDto>> searchStudentsByName(
 }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update student", description = "Updates an existing student by id.")
+    @Operation(summary = "Telebeni yenile", description = "Telebeni ID uzre yenileyir")
     public ResponseEntity<StudentResponseDto> updateStudent(
             @PathVariable Long id,
             @Valid @RequestBody StudentRequestDto requestDto) {
@@ -64,7 +64,7 @@ public ResponseEntity<List<StudentResponseDto>> searchStudentsByName(
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete student", description = "Deletes a student by id.")
+    @Operation(summary = "Telebeni sil", description = "Telebeni ID uzre silir")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.noContent().build();
