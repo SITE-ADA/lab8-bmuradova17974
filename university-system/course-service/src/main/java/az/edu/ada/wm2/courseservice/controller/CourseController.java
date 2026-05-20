@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -83,4 +84,12 @@ public class CourseController {
     public ResponseEntity<CourseStudentsResponseDto> getCourseStudents(@PathVariable Long courseId) {
         return ResponseEntity.ok(courseService.getCourseStudents(courseId));
     }
+
+    @GetMapping("/by-student-name")
+@Operation(summary = "Tələbə adına görə kursları gətir",
+        description = "Tələbənin adı ilə axtarış aparır və həmin tələbənin qeydiyyatdan keçdiyi kursları qaytarır.")
+public ResponseEntity<List<CourseResponseDto>> getCoursesByStudentName(
+        @RequestParam String name) {
+    return ResponseEntity.ok(courseService.getCoursesByStudentName(name));
+}
 }

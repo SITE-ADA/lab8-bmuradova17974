@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -45,6 +46,14 @@ public class StudentController {
     public ResponseEntity<StudentResponseDto> getStudentById(@PathVariable Long id) {
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
+
+    @GetMapping("/search")
+@Operation(summary = "Ada görə tələbə axtar",
+        description = "Ad və ya soyadı verilmiş mətnə uyğun olan tələbələri qaytarır.")
+public ResponseEntity<List<StudentResponseDto>> searchStudentsByName(
+        @RequestParam String name) {
+    return ResponseEntity.ok(studentService.searchStudentsByName(name));
+}
 
     @PutMapping("/{id}")
     @Operation(summary = "Update student", description = "Updates an existing student by id.")
