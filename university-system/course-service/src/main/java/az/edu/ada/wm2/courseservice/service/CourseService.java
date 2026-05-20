@@ -96,7 +96,8 @@ public class CourseService {
                 savedEnrollment.getId(),
                 savedEnrollment.getCourseId(),
                 savedEnrollment.getStudentId(),
-                "Student enrolled successfully."
+                savedEnrollment.getEnrollmentDate(),
+                "Telebe ugurla qeydiyyatdan kecdi."
         );
     }
 
